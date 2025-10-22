@@ -113,17 +113,28 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
   
-  /* Hide Lovable watermark/badge */
-  a[href*="lovable.dev"], 
-  a[href*="lovable.app"],
-  iframe[src*="lovable.dev"],
-  iframe[src*="lovable.app"],
-  div[style*="Edit with Lovable"],
+  /* Hide Lovable watermark/badge - AGGRESSIVE MODE */
+  a[href*="lovable"],
+  a[href*="edit"],
+  iframe[src*="lovable"],
+  iframe[sandbox*="lovable"],
+  div[style*="lovable"],
+  div[style*="Edit"],
   div[class*="lovable"],
   div[id*="lovable"],
+  span[class*="lovable"],
+  button[class*="lovable"],
   [data-lovable],
+  [aria-label*="lovable"],
+  [aria-label*="Lovable"],
+  [aria-label*="Edit"],
+  [title*="lovable"],
+  [title*="Lovable"],
+  [title*="Edit"],
   .lovable-badge,
-  #lovable-badge {
+  #lovable-badge,
+  *[class*="edit-button"],
+  *[class*="EditButton"] {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
@@ -131,7 +142,16 @@ All colors MUST be HSL.
     position: absolute !important;
     width: 0 !important;
     height: 0 !important;
+    left: -9999px !important;
     z-index: -9999 !important;
     overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Hide any fixed positioned elements in bottom-right corner that might be badges */
+  div[class*="fixed"][class*="bottom"][class*="right"]:has(a[href*="lovable"]),
+  div[class*="fixed"][class*="bottom"][class*="right"]:has(button) {
+    display: none !important;
   }
 }
