@@ -113,7 +113,8 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
   
-  /* Hide Lovable watermark/badge - AGGRESSIVE MODE */
+  /* Hide Lovable watermark/badge - ULTRA AGGRESSIVE MODE */
+  /* Target all possible lovable elements */
   a[href*="lovable"],
   a[href*="edit"],
   iframe[src*="lovable"],
@@ -134,7 +135,20 @@ All colors MUST be HSL.
   .lovable-badge,
   #lovable-badge,
   *[class*="edit-button"],
-  *[class*="EditButton"] {
+  *[class*="EditButton"],
+  /* Target all fixed positioned elements that might be badges */
+  body > div[class*="fixed"],
+  body > a[class*="fixed"],
+  body > button[class*="fixed"],
+  div[class*="fixed"][class*="bottom"],
+  div[class*="fixed"][class*="right"],
+  div[style*="position: fixed"],
+  div[style*="position:fixed"],
+  /* Target specific badge positions */
+  div[class*="fixed"][class*="bottom-4"],
+  div[class*="fixed"][class*="right-4"],
+  a[class*="fixed"][class*="bottom-4"],
+  a[class*="fixed"][class*="right-4"] {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
@@ -143,15 +157,16 @@ All colors MUST be HSL.
     width: 0 !important;
     height: 0 !important;
     left: -9999px !important;
+    top: -9999px !important;
     z-index: -9999 !important;
     overflow: hidden !important;
     clip: rect(0,0,0,0) !important;
+    clip-path: inset(100%) !important;
     white-space: nowrap !important;
   }
   
-  /* Hide any fixed positioned elements in bottom-right corner that might be badges */
-  div[class*="fixed"][class*="bottom"][class*="right"]:has(a[href*="lovable"]),
-  div[class*="fixed"][class*="bottom"][class*="right"]:has(button) {
+  /* Override any inline styles */
+  body > div[style*="position"][style*="fixed"]:not([id="root"]):not([class*="toast"]) {
     display: none !important;
   }
 }
